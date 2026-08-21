@@ -61,7 +61,8 @@ Each smell reads *what it is* → *how to fix*; match it against the diff:
 
 - The full diff command and commit list.
 - The list of standards-source files you found in step 3, **plus the smell baseline from step 3** pasted in full (the sub-agent has no other access to it).
-- The brief: "Report, per file/hunk where relevant, (a) every place the diff violates a documented standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and quote the hunk. Distinguish hard violations from judgement calls: documented-standard breaches can be hard, but baseline smells are always judgement calls, and a documented repo standard overrides the baseline. Skip anything tooling enforces. Under 400 words."
+- An instruction to search the codebase (grep, and git log for prior commits/migrations touching the same area) for how this problem, or the same class of problem, has already been solved elsewhere, a sibling implementation or a precedent fix, before judging whether the diff's approach is sound. A diff that quietly diverges from an established precedent is a finding even when it violates no documented standard and matches no named smell.
+- The brief: "Report, per file/hunk where relevant, (a) every place the diff violates a documented standard: cite the standard (file + the rule); (b) any baseline smell you spot: name it and quote the hunk; and (c) any place the diff diverges from an existing precedent elsewhere in the codebase for the same class of problem: name the precedent (file/commit) and quote both sides. Distinguish hard violations from judgement calls: documented-standard breaches can be hard, but baseline smells and precedent divergences are always judgement calls, and a documented repo standard overrides the baseline. Skip anything tooling enforces. Under 400 words."
 
 **Spec sub-agent prompt** should include:
 
